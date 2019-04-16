@@ -34,6 +34,9 @@
     <Reference Include="CitizenFX.Core.Client, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CitizenFX.Core.Client.1.0.1180\lib\net45\CitizenFX.Core.Client.dll</HintPath>
     </Reference>
+    <Reference Include="MenuAPI">
+      <HintPath>..\..\..\..\Downloads\MenuAPI-v2.0.9\MenuAPI.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,6 +48,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
+    <Compile Include="Menus\MainMenu.cs" />
+    <Compile Include="Menus\RaceCreatorMenu.cs" />
+    <Compile Include="Menus\RaceSelectionMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
