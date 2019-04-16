@@ -5,8 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 using MenuAPI;
-using CitizenFX.Core;
-using static CitizenFX.Core.Native.API;
 
 namespace Client.Menus
 {
@@ -27,8 +25,7 @@ namespace Client.Menus
         {
             menu = new Menu("Race Selector");
 
-            //TODO: Read races dynamically from databse
-            
+            // TODO: Read races dynamically from databse
         }
     }
 }

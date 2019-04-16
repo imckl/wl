@@ -12,7 +12,7 @@ namespace Client.Menus
     {
         private Menu menu;
         private static RaceSelectionMenu raceSelectionMenu;
-        private static RaceCreatorMenu raceCreatorMenu;
+        private static RaceCreatorTypeMenu raceCreatorMenu;
 
         public Menu GetMenu()
         {
@@ -30,8 +30,11 @@ namespace Client.Menus
 
             // Create the main menu
             menu = new Menu("Race System") { Visible = false };
-            raceCreatorMenu = new RaceCreatorMenu();
+            raceCreatorMenu = new RaceCreatorTypeMenu();
             raceSelectionMenu = new RaceSelectionMenu();
+
+            MenuController.AddMenu(menu);
+            MenuController.MainMenu = menu;
 
             // Menu buttons
             MenuItem raceStartMenuBtn = new MenuItem("Start Race", "Start a race you want!");

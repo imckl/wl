@@ -24,6 +24,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{011A0082-0599-42A6-8472-B4B15DBCF83C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "client", "client", "{97C6876C-EA1A-4649-9E5A-ECF40C1F9722}"
+	ProjectSection(SolutionItems) = preProject
+		lib\client\MenuAPI.dll = lib\client\MenuAPI.dll
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{71569242-6268-4E47-A8C8-D5DFA97814A5}"
 EndProject
@@ -58,9 +61,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Freeroam\Server\S
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RaceSystem", "RaceSystem", "{74E20A9B-D030-4427-A92D-3458C10BD49B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{F67E007D-CF6F-4A27-A70B-5AC494F58197}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Feature\RaceSystem\Client\Client.csproj", "{F67E007D-CF6F-4A27-A70B-5AC494F58197}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{27204F69-8E46-481E-B6B5-E42FB49CDA29}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Feature\RaceSystem\Server\Server.csproj", "{27204F69-8E46-481E-B6B5-E42FB49CDA29}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
