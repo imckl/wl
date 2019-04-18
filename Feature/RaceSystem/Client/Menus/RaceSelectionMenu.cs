@@ -8,24 +8,15 @@ using MenuAPI;
 
 namespace Client.Menus
 {
-    class RaceSelectionMenu
+    public class RaceSelectionMenu : SubMenu
     {
-        private Menu menu;
-
-        public Menu GetMenu()
-        {
-            if (menu == null)
-            {
-                CreateMenu();
-            }
-            return menu;
-        }
-
-        private void CreateMenu()
+        protected override void CreateMenu()
         {
             menu = new Menu("Race Selector");
 
-            // TODO: Read races dynamically from databse
+            // TODO: Read races dynamically from database
         }
+        
+        public RaceSelectionMenu(MainMenu rootMenu) : base(rootMenu) { }
     }
 }

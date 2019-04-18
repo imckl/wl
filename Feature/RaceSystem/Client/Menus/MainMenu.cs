@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using CitizenFX.Core;
 using MenuAPI;
 
 namespace Client.Menus
 {
-    class MainMenu
+    public class MainMenu
     {
         private Menu menu;
         private static RaceSelectionMenu raceSelectionMenu;
         private static RaceCreatorTypeMenu raceCreatorMenu;
+
+        public bool isPlacingCP;
+        public bool requestSave;
+        public bool requestCleanUp;
+        public string raceName;
 
         public Menu GetMenu()
         {
@@ -23,6 +28,16 @@ namespace Client.Menus
             return menu;
         }
 
+        public void SetRaces(List<Dictionary<string, string>> races)
+        {
+            raceSelectionMenu.GetMenu().ClearMenuItems();
+            races.ForEach(record =>
+            {
+                raceSelectionMenu.GetMenu().AddMenuItem(new MenuItem(record["name"]){Label = record["author"]});
+            });
+            raceSelectionMenu.GetMenu().RefreshIndex();
+        }
+
         private void CreateMenu()
         {
             // Menu align with left side
@@ -30,8 +45,8 @@ namespace Client.Menus
 
             // Create the main menu
             menu = new Menu("Race System") { Visible = false };
-            raceCreatorMenu = new RaceCreatorTypeMenu();
-            raceSelectionMenu = new RaceSelectionMenu();
+            raceCreatorMenu = new RaceCreatorTypeMenu(this);
+            raceSelectionMenu = new RaceSelectionMenu(this);
 
             MenuController.AddMenu(menu);
             MenuController.MainMenu = menu;
@@ -56,6 +71,9 @@ namespace Client.Menus
             {
                 if (_item.Text == "Exit")
                     menu.CloseMenu();
+                
+                if(_item.Text == "Start Race")
+                    BaseScript.TriggerServerEvent("rs:GetRaces");
             };
         }
     }

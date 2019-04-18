@@ -6,36 +6,23 @@ using System.Threading.Tasks;
 
 using MenuAPI;
 using CitizenFX.Core;
-using static CitizenFX.Core.Native.API;
+using CitizenFX.Core.Native;
 
 namespace Client.Menus
 {
-    class RaceCreatorTypeMenu
+    public class RaceCreatorTypeMenu : SubMenu
     {
-        private Menu menu;
-        private Vector3 origCamCoord;
         private static RaceCreatorMainMenu raceCreatorMainMenu;
 
-        public bool isPlacingCP;
-
-        public Menu GetMenu()
-        {
-            if (menu == null)
-            {
-                CreateMenu();
-            }
-            return menu;
-        }
-
-        private void CreateMenu()
+        protected override void CreateMenu()
         {
             menu = new Menu("Race Creator", "Race Type");
-            raceCreatorMainMenu = new RaceCreatorMainMenu();
+            raceCreatorMainMenu = new RaceCreatorMainMenu(rootMenu);
             MenuController.AddSubmenu(menu, raceCreatorMainMenu.GetMenu());
 
             // Initialize race type items
             List<string> items = new List<string>() { "Land Race", "Air Race", "Sea Race" };
-            items.ForEach(item => AddButton(raceCreatorMainMenu.GetMenu(), new MenuItem(item)));
+            items.ForEach(item => AddButton(new MenuItem(item)));
             
             // Button handler
             menu.OnItemSelect += (_menu, _item, _index) =>
@@ -43,27 +30,19 @@ namespace Client.Menus
                 string selectedTypeString = _item.Text;
 
                 // Pass the type string to new creator submenu
-                raceCreatorMainMenu.typeString = selectedTypeString;
+                raceCreatorMainMenu.TypeString = selectedTypeString;
 
-                // Setup the environment for player
-                PlayerSetup();
+                MenuController.DisableBackButton = true;
             };
         }
 
-        private void AddButton(Menu subMenu, MenuItem menuItem)
+        private void AddButton(MenuItem menuItem)
         {
+            // Add button to menu and bind them to submenus
             menu.AddMenuItem(menuItem);
-            MenuController.BindMenuItem(menu, subMenu, menuItem);
+            MenuController.BindMenuItem(menu, raceCreatorMainMenu.GetMenu(), menuItem);
         }
-
-        private void PlayerSetup()
-        {
-            int playerCamHandle = GetRenderingCam();
-            origCamCoord = GetCamCoord(playerCamHandle);
-
-            // Raise the camera to the sky
-            // TODO: Change Z axis
-            SetCamCoord(playerCamHandle, origCamCoord.X, origCamCoord.Y, origCamCoord.Z);
-        }
+        
+        public RaceCreatorTypeMenu(MainMenu rootMenu) : base(rootMenu) { }
     }
 }
