@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.156
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.539
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mission", "Mission", "{5D5A822B-AF58-42A1-8E81-D50C819AD7AA}"
 EndProject
@@ -29,6 +29,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "client", "client", "{97C687
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{71569242-6268-4E47-A8C8-D5DFA97814A5}"
+	ProjectSection(SolutionItems) = preProject
+		lib\shared\Newtonsoft.Json.dll = lib\shared\Newtonsoft.Json.dll
+		lib\shared\System.Numerics.dll = lib\shared\System.Numerics.dll
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "server", "server", "{FE3580A3-1109-4145-8537-3E2856826EE7}"
 	ProjectSection(SolutionItems) = preProject

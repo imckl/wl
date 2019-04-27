@@ -5,6 +5,8 @@ using ServiceStack.DataAnnotations;
 using ServiceStack.OrmLite;
 using ServiceStack.Text.Common;
 
+using Newtonsoft.Json;
+
 namespace Server
 {
     public class Database
@@ -133,6 +135,28 @@ namespace Server
             });
 
             return results;
+        }
+
+        /// <summary>
+        /// Insert race from json format
+        /// </summary>
+        /// <param name="_name"></param>
+        /// <param name="_author"></param>
+        /// <param name="posAsJson"></param>
+        /// <returns></returns>
+        public bool InsertRaceJson(string _name, string _author, string posAsJson)
+        {
+            var pos = JsonConvert.DeserializeObject<List<Vector3>>(posAsJson);
+            return InsertRace(_name, _author, pos);
+        }
+
+        /// <summary>
+        /// 返回Json格式的Races信息
+        /// </summary>
+        /// <returns></returns>
+        public string GetRacesJson()
+        {
+            return JsonConvert.SerializeObject(GetRaces());
         }
     }
 }

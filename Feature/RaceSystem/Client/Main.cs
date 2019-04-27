@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+
+using Newtonsoft.Json;
+
 using CitizenFX.Core;
 using CitizenFX.Core.Native;
 using CitizenFX.Core.NaturalMotion;
@@ -24,6 +27,16 @@ namespace Client
 
         private int creatorIndex = -1;
         private List<Vector3> creatorCheckpointPos;
+        /// <summary>
+        /// creatorCheckpointPos:JsonFormat
+        /// </summary>
+        private string creatorCheckpointPosJson
+        {
+            get
+            {
+                return JsonConvert.SerializeObject(creatorCheckpointPos);
+            }
+        }
         private List<int> creatorBlips;
         private List<int> creatorCheckpoints;
 
@@ -49,11 +62,21 @@ namespace Client
             API.RegisterCommand("race", new Action<int, List<object>, string>(RaceCommand), false);
             EventHandlers["rs:Received"] += new Action<string>(Received);
             EventHandlers["rs:SetRaces"] += new Action<List<Dictionary<string, string>>>(SetRaces);
+            EventHandlers["rs:SetRacesJson"] += new Action<string>(SetRacesJson);
         }
 
         private void SetRaces(List<Dictionary<string, string>> races)
         {
             mainMenu.SetRaces(races);
+        }
+
+        /// <summary>
+        /// Set races as json format
+        /// </summary>
+        /// <param name="racesAsJson"></param>
+        private void SetRacesJson(string racesAsJson)
+        {
+            mainMenu.SetRacesJson(racesAsJson);
         }
 
         private void Received(string resp)
@@ -209,7 +232,8 @@ namespace Client
             if (mainMenu.requestSave)
             {
                 mainMenu.requestSave = false;
-                TriggerServerEvent("rs:SaveRace", mainMenu.raceName, creatorCheckpointPos);
+                TriggerServerEvent("rs:SaveRaceJson", mainMenu.raceName, creatorCheckpointPosJson);
+                //TriggerServerEvent("rs:SaveRace", mainMenu.raceName, creatorCheckpointPos);
                 while (!isReceived)
                 {
                     await Delay(100);

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using Newtonsoft.Json;
+
 using CitizenFX.Core;
 using MenuAPI;
 
@@ -36,6 +39,16 @@ namespace Client.Menus
                 raceSelectionMenu.GetMenu().AddMenuItem(new MenuItem(record["name"]){Label = record["author"]});
             });
             raceSelectionMenu.GetMenu().RefreshIndex();
+        }
+
+        /// <summary>
+        /// Set races from json format
+        /// </summary>
+        /// <param name="racesAsJson"></param>
+        public void SetRacesJson(string racesAsJson)
+        {
+            var races = JsonConvert.DeserializeObject<List<Dictionary<string, string>>>(racesAsJson);
+            SetRaces(races);
         }
 
         private void CreateMenu()
@@ -73,7 +86,8 @@ namespace Client.Menus
                     menu.CloseMenu();
                 
                 if(_item.Text == "Start Race")
-                    BaseScript.TriggerServerEvent("rs:GetRaces");
+                    //BaseScript.TriggerServerEvent("rs:GetRaces");
+                    BaseScript.TriggerServerEvent("rs:GetRacesJson");
             };
         }
     }
